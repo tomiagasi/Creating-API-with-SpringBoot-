@@ -42,4 +42,9 @@ public class EmployeeController {
         }
         return forReturn;
     }
+
+    @RequestMapping(value = "/update-by-id", method = RequestMethod.PUT)
+    public String updateById(@RequestBody Employee employee) {
+        return employeeService.updateById(employee);
+    }
 }

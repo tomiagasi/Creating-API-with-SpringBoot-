@@ -29,4 +29,16 @@ public class EmployeeService {
      public void deleteById(Integer id){
         employeeDao.deleteById(id);
      }
+
+     public String updateById(Employee employee){
+        String forReturn = null;
+        try{
+            employeeDao.deleteById(employee.getId());
+            employeeDao.save(employee);
+            forReturn = "Data berhasil di perbarui";
+        }catch (Exception e){
+            forReturn = e.getMessage();
+        }
+        return forReturn;
+     }
 }
