@@ -30,4 +30,16 @@ public class EmployeeController {
     public Optional<Employee> findById(@RequestParam Integer id) {
         return employeeService.findById(id);
     }
+
+    @RequestMapping(value = "/delete-by-id", method = RequestMethod.DELETE)
+    public String deleteById(@RequestParam Integer id) {
+        String forReturn = null;
+        try {
+            employeeService.deleteById(id);
+            forReturn = "Data berhasil di hapus";
+        }catch (Exception e){
+            forReturn = e.getMessage();
+        }
+        return forReturn;
+    }
 }

@@ -25,4 +25,8 @@ public class EmployeeService {
     public Optional<Employee> findById(Integer id){
         return employeeDao.findById(id);
     }
+
+     public void deleteById(Integer id){
+        employeeDao.deleteById(id);
+     }
 }
