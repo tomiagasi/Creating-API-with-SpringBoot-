@@ -22,18 +22,18 @@ public class EmployeeService {
         return employeeDao.findAll();
     }
 
-    public Optional<Employee> findById(Integer id){
-        return employeeDao.findById(id);
+    public Optional<Employee> findById(Integer nip){
+        return employeeDao.findById(nip);
     }
 
-     public void deleteById(Integer id){
-        employeeDao.deleteById(id);
+     public void deleteById(Integer nip){
+        employeeDao.deleteById(nip);
      }
 
      public String updateById(Employee employee){
         String forReturn = null;
         try{
-            employeeDao.deleteById(employee.getId());
+            employeeDao.deleteById(employee.getNip());
             employeeDao.save(employee);
             forReturn = "Data berhasil di perbarui";
         }catch (Exception e){

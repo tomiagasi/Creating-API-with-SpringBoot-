@@ -27,15 +27,15 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/find-by-id", method = RequestMethod.GET)
-    public Optional<Employee> findById(@RequestParam Integer id) {
-        return employeeService.findById(id);
+    public Optional<Employee> findById(@RequestParam Integer nip) {
+        return employeeService.findById(nip);
     }
 
     @RequestMapping(value = "/delete-by-id", method = RequestMethod.DELETE)
-    public String deleteById(@RequestParam Integer id) {
+    public String deleteById(@RequestParam Integer nip) {
         String forReturn = null;
         try {
-            employeeService.deleteById(id);
+            employeeService.deleteById(nip);
             forReturn = "Data berhasil di hapus";
         }catch (Exception e){
             forReturn = e.getMessage();
