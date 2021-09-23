@@ -1,0 +1,30 @@
+tomiagasi:
+    app:
+        jwtExpirationMs: 86400000
+        jwtSecret: tomiagasiSecretKey
+server:
+    port: 8037
+spring:
+    datasource:
+        driver-class-name: oracle.jdbc.OracleDriver
+        password: USR
+        url: jdbc:oracle:thin:@10.243.129.243:1521:SID
+        username: PASS
+    jpa:
+        database-platform: org.hibernate.dialect.Oracle10gDialect
+        hibernate:
+            ddl-auto: create
+        show-sql: true
+    kafka:
+        consumer:
+            auto-offset-reset: earliest
+            bootstrap-servers: 161.202.178.203:9092
+            group-id: testing
+            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            some:
+                property: foo
+            value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        producer:
+            bootstrap-servers: 161.202.178.203:9092
+            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
