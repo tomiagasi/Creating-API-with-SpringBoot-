@@ -7,22 +7,14 @@ import org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoC
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.DispatcherServlet;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import javax.naming.NamingException;
 
 @SpringBootApplication
-@EnableSwagger2
 public class TestApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NamingException {
 		SpringApplication.run(TestApplication.class, args);
-	}
-	@Bean
-	public Docket productApi() {
-		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.example.demo")).build();
 	}
 
 	@Bean
