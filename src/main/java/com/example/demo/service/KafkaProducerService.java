@@ -1,13 +1,13 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Biodata;
 import com.example.demo.model.Constants;
-import com.example.demo.model.Employee;
+import com.example.demo.model.UserManagement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import sun.nio.cs.US_ASCII;
 
 
 @SuppressWarnings("ALL")
@@ -18,11 +18,11 @@ public class KafkaProducerService {
     private static final String TOPIC = Constants.topic;
 
     @Autowired
-    private KafkaTemplate<Object, Biodata> kafkaTemplate;
+    private KafkaTemplate<Object, UserManagement> kafkaTemplate;
 
-    public void sendMessage(Biodata biodata) {
-        logger.info(String.format("#### -> Producing message -> %s", biodata));
-        this.kafkaTemplate.send(TOPIC, biodata);
+    public void sendMessage(UserManagement userManagement) {
+        logger.info(String.format("#### -> Producing message -> %s", userManagement));
+        this.kafkaTemplate.send(TOPIC, userManagement);
     }
 
 //    public void sendMessageEmployee(String employee) {

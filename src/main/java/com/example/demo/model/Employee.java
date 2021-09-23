@@ -8,9 +8,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.util.Date;
 
+@Entity
 @Getter
 @Setter
-@Entity
 @Table(name = "MASTER_EMPLOYEE")
 @EntityListeners(AuditingEntityListener.class)
 public class Employee {
@@ -35,6 +35,4 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "KD_JABATAN", insertable = false, updatable = false)
     private Jabatan jabatan;
-
-
 }
