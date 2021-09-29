@@ -18,15 +18,10 @@ public class KafkaProducerService {
     private static final String TOPIC = Constants.topic;
 
     @Autowired
-    private KafkaTemplate<Object, UserManagement> kafkaTemplate;
+    private KafkaTemplate<Object, String> kafkaTemplate;
 
-    public void sendMessage(UserManagement userManagement) {
+    public void sendMessage(String userManagement) {
         logger.info(String.format("#### -> Producing message -> %s", userManagement));
         this.kafkaTemplate.send(TOPIC, userManagement);
     }
-
-//    public void sendMessageEmployee(String employee) {
-//        logger.info(String.format("#### -> Producing message -> %s", employee));
-//        this.kafkaTemplate.send(TOPIC, employee);
-//    }
 }
