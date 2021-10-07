@@ -3,8 +3,11 @@ package com.example.demo.controller;
 import com.example.demo.model.*;
 import com.example.demo.security.jwt.JwtTokenUtil;
 import com.example.demo.security.jwt.JwtUserDetailsService;
+import com.example.demo.service.KafkaProducerService;
 import com.example.demo.service.RoleManagementService;
 import com.example.demo.service.UserManagementService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,6 +31,8 @@ public class UserManagementController {
 
     @Autowired
     private JwtUserDetailsService jwtUserDetailsService;
+
+    private final Logger logger = LoggerFactory.getLogger(KafkaProducerService.class);
 
     private ErrorCode errorCode = new ErrorCode();
 

@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Constants;
 import com.example.demo.model.ErrorCode;
-import com.example.demo.model.SignInResponse;
 import com.example.demo.model.UserManagement;
 import com.example.demo.service.KafkaProducerService;
 import com.example.demo.service.RoleManagementService;
@@ -11,12 +10,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/kafka")
-public class KafkaProducerController {
+public class KafkaController {
 
     @Autowired
     private UserManagementService userManagementService;
@@ -28,8 +26,7 @@ public class KafkaProducerController {
 
     private ErrorCode errorCode = new ErrorCode();
 
-    @Autowired
-    KafkaProducerController(KafkaProducerService producer) {
+    public KafkaController(KafkaProducerService producer) {
         this.producer = producer;
     }
 
@@ -60,4 +57,19 @@ public class KafkaProducerController {
             return ResponseEntity.badRequest().body(errorCode);
         }
     }
+
+    @PostMapping(value = "/create-topic")
+    public ResponseEntity<?> createKafkaTopic(@RequestParam String topicName){
+        try{
+            producer.createTopic(topicName);
+            errorCode.setCode(Constants.SUCCESS[0]);
+            errorCode.setMessage(Constants.SUCCESS[1]);
+            return ResponseEntity.ok().body(errorCode);
+        }catch (Exception e){
+            errorCode.setCode(Constants.METHOD_ERROR[0]);
+            errorCode.setMessage(Constants.METHOD_ERROR[1]);
+            return ResponseEntity.badRequest().body(errorCode);
+        }
+    }
 }
+

@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.UserManagementDao;
-import com.example.demo.model.ErrorCode;
 import com.example.demo.model.UserManagement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,8 +15,6 @@ public class UserManagementService {
 
     @Autowired
     private UserManagementDao userManagementDao;
-
-    private ErrorCode errorCode = new ErrorCode();
 
     public List<UserManagement> findAll(){
         return userManagementDao.findAll();

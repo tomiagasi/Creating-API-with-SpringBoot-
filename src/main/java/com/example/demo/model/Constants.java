@@ -1,13 +1,11 @@
 package com.example.demo.model;
 
-import org.apache.kafka.common.protocol.types.Field;
-
 public class Constants {
     public static final String topic = "testing-tomi";
     public static final String groupId = "testing";
 
-    public static final int MAX_REQUESTS_PER_SECOND = 10;
 
+    public static final int MAX_REQUESTS_PER_SECOND = 10;
     /*
     ERROR CODE & MESSAGE
      */

@@ -1,13 +1,14 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Constants;
-import com.example.demo.model.UserManagement;
+import org.apache.kafka.common.internals.Topic;
+import org.apache.kafka.common.protocol.types.Field;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
-import sun.nio.cs.US_ASCII;
 
 
 @SuppressWarnings("ALL")
@@ -23,5 +24,9 @@ public class KafkaProducerService {
     public void sendMessage(String userManagement) {
         logger.info(String.format("#### -> Producing message -> %s", userManagement));
         this.kafkaTemplate.send(TOPIC, userManagement);
+    }
+
+    public void createTopic(String topicName){
+        TopicBuilder.name(topicName);
     }
 }
