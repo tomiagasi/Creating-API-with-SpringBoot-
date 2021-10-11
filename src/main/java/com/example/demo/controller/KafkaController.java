@@ -30,7 +30,7 @@ public class KafkaController {
         this.producer = producer;
     }
 
-    @PostMapping(value = "/publish")
+    @PostMapping(value = "/user-management-signup")
     public ResponseEntity<?> sendMessageToKafkaTopicEmployee(@RequestBody UserManagement userManagement) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         String userData = objectMapper.writeValueAsString(userManagement);

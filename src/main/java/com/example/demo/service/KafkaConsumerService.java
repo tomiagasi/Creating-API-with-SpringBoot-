@@ -22,6 +22,10 @@ public class KafkaConsumerService {
     public void consume(String message) {
         logger.info(String.format("#### -> Consumed message -> %s", message));
         UserManagement userManagement = new Gson().fromJson(message, UserManagement.class);
-        userManagementService.save(userManagement);
+        if(userManagementService.findById(userManagement.getUsername()).isPresent()){
+            logger.info(String.format("#### Username Already Exist! ####"));
+        }else{
+            userManagementService.save(userManagement);
+        }
     }
 }
