@@ -13,8 +13,8 @@ public class Constants {
     Kafka config
      */
     public static String KAFKA_SERVER;
-    public static int PARTITIONS = 2;
-    public static short REPLICATION = 2;
+    public static final int PARTITIONS = 2;
+    public static final short REPLICATION = 2;
 
     /*
     ERROR CODE & MESSAGE
