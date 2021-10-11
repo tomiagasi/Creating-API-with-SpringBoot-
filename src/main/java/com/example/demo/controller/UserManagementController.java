@@ -73,7 +73,7 @@ public class UserManagementController {
 
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     public ResponseEntity<?> signin(@RequestBody SigninRequest signinRequest){
-        if (userManagementService.authentication(signinRequest.getUsername(), signinRequest.getPassword())) {
+        if (userManagementService.authentication(signinRequest.getUsername(), signinRequest.getPassword()) == true) {
             final UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(signinRequest.getUsername());
             final String token = jwtTokenUtil.generateToken(userDetails);
             SignInResponse signInResponse = new SignInResponse();

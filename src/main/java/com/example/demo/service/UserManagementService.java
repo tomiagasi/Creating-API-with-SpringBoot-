@@ -38,7 +38,12 @@ public class UserManagementService {
 
     public Boolean authentication(String username, String password) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        String passwordFromTable = userManagementDao.findById(username).get().getPassword();
-        return bCryptPasswordEncoder.matches(password, passwordFromTable);
+        try{
+            String passwordFromTable = userManagementDao.findById(username).get().getPassword();
+            return bCryptPasswordEncoder.matches(password, passwordFromTable);
+        }catch (Exception e){
+            return false;
+        }
+
     }
 }
