@@ -21,8 +21,17 @@ public class BackendAuditrail {
     @Column(name = "id", nullable = false)
     private String id;
 
+    @Column(name = "TOKEN")
+    private String token;
+
+    @Column(name = "USERNAME")
+    private String username;
+
     @Column(name = "REQUEST_API")
     private String requestApi;
+
+    @Column(name = "REQUEST_METHOD")
+    private String requestMethod;
 
     @Column(name = "RESPONSE_API")
     private String responseApi;
@@ -32,4 +41,7 @@ public class BackendAuditrail {
 
     @Column(name = "HIT_DATE")
     private Date hitDate;
+
+    @Column(name = "IP_ADDRESS")
+    private String ipAddress;
 }
