@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.*;
+import com.example.demo.model.requestbody.SigninRequest;
+import com.example.demo.model.responsebody.ErrorCode;
+import com.example.demo.model.responsebody.SignInResponse;
 import com.example.demo.security.jwt.JwtTokenUtil;
 import com.example.demo.security.jwt.JwtUserDetailsService;
 import com.example.demo.service.KafkaProducerService;
@@ -41,6 +44,12 @@ public class UserManagementController {
         if(userManagementService.findById(userManagement.getUsername()).isPresent()){
             errorCode.setCode(Constants.USERNAME_EXIST[0]);
             errorCode.setMessage(Constants.USERNAME_EXIST[1]);
+            return ResponseEntity.badRequest().body(errorCode);
+        }
+
+        if(userManagementService.findByEmail(userManagement.getEmail()) != null){
+            errorCode.setCode(Constants.EMAIL_EXIST[0]);
+            errorCode.setMessage(Constants.EMAIL_EXIST[1]);
             return ResponseEntity.badRequest().body(errorCode);
         }
 

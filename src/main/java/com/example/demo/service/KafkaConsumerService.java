@@ -24,6 +24,8 @@ public class KafkaConsumerService {
         UserManagement userManagement = new Gson().fromJson(message, UserManagement.class);
         if(userManagementService.findById(userManagement.getUsername()).isPresent()){
             logger.info(String.format("#### Username Already Exist! ####"));
+        }else if(userManagementService.findByEmail(userManagement.getEmail()) != null){
+            logger.info(String.format("#### Email Already Exist! ####"));
         }else{
             userManagementService.save(userManagement);
         }

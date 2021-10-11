@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.model.requestbody;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -21,15 +21,19 @@ public class UserManagementService {
     }
 
     public UserManagement save(UserManagement userManagement){
-        /*
-        encryption password
-         */
-        int strength = 31;
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(strength, new SecureRandom());
-        String encodedPassword = bCryptPasswordEncoder.encode(userManagement.getPassword());
-        userManagement.setPassword(encodedPassword);
-
+        userManagement.setPassword(encryptPassword(userManagement.getPassword()));
         return userManagementDao.save(userManagement);
+    }
+
+    public UserManagement update(UserManagement userManagement){
+        UserManagement userManagementToUpdate = userManagementDao.getOne(userManagement.getUsername());
+        userManagementToUpdate.setUsername(userManagement.getUsername());
+        userManagementToUpdate.setPassword(encryptPassword(userManagement.getPassword()));
+        userManagementToUpdate.setFirstName(userManagement.getFirstName());
+        userManagementToUpdate.setLastName(userManagementToUpdate.getLastName());
+        userManagementToUpdate.setAddress(userManagement.getAddress());
+        userManagementToUpdate.setRoleId(userManagement.getRoleId());
+        return userManagementDao.save(userManagementToUpdate);
     }
 
     public Optional<UserManagement> findById(String username){
@@ -45,5 +49,20 @@ public class UserManagementService {
             return false;
         }
 
+    }
+
+    public String encryptPassword(String password){
+        int strength = 31;
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(strength, new SecureRandom());
+        String encodedPassword = bCryptPasswordEncoder.encode(password);
+        return encodedPassword;
+    }
+
+    public UserManagement getOne(String username){
+        return userManagementDao.getOne(username);
+    }
+
+    public <Optional>UserManagement findByEmail(String email){
+        return userManagementDao.findByEmail(email);
     }
 }

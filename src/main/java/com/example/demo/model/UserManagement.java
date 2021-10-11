@@ -36,6 +36,9 @@ public class UserManagement {
     @Column(name = "ROLEID")
     private int roleId;
 
+    @Column(name = "EMAIL")
+    private String email;
+
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "ROLEID", insertable = false, updatable = false)
