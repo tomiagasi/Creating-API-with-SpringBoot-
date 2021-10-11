@@ -1,14 +1,24 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Constants;
+import org.apache.kafka.clients.admin.AdminClient;
+import org.apache.kafka.clients.admin.AdminClientConfig;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.common.internals.Topic;
 import org.apache.kafka.common.protocol.types.Field;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+
+import static java.util.Arrays.asList;
 
 
 @SuppressWarnings("ALL")
@@ -27,6 +37,15 @@ public class KafkaProducerService {
     }
 
     public void createTopic(String topicName){
-        TopicBuilder.name(topicName);
+        Properties config = new Properties();
+        config.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "tomiagasi-server:9092");
+
+        AdminClient admin = AdminClient.create(config);
+
+        Map<String, String> configs = new HashMap<>();
+        int partitions = 2;
+        short replication = 2;
+
+        admin.createTopics(asList(new NewTopic(topicName, partitions, replication).configs(configs)));
     }
 }
