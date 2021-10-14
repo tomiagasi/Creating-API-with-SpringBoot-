@@ -7,11 +7,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 
 @Service
 public class MailService {
@@ -20,7 +16,7 @@ public class MailService {
     JavaMailSender mailSender;
 
     public void sendEmail(Mail mail) {
-        
+
         MimeMessage mimeMessage = mailSender.createMimeMessage();
 
         try {

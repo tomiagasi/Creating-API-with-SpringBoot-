@@ -3,7 +3,6 @@ package com.example.demo.model;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.kafka.common.protocol.types.Field;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;

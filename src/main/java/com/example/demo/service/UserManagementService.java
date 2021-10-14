@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.security.SecureRandom;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,19 +15,22 @@ public class UserManagementService {
     @Autowired
     private UserManagementDao userManagementDao;
 
+    @Autowired
+    private HelperService helperService;
+
     public List<UserManagement> findAll(){
         return userManagementDao.findAll();
     }
 
     public UserManagement save(UserManagement userManagement){
-        userManagement.setPassword(encryptPassword(userManagement.getPassword()));
+        userManagement.setPassword(helperService.encryptPassword(userManagement.getPassword()));
         return userManagementDao.save(userManagement);
     }
 
     public UserManagement update(UserManagement userManagement){
         UserManagement userManagementToUpdate = userManagementDao.getOne(userManagement.getUsername());
         userManagementToUpdate.setUsername(userManagement.getUsername());
-        userManagementToUpdate.setPassword(encryptPassword(userManagement.getPassword()));
+        userManagementToUpdate.setPassword(userManagement.getPassword());
         userManagementToUpdate.setFirstName(userManagement.getFirstName());
         userManagementToUpdate.setLastName(userManagementToUpdate.getLastName());
         userManagementToUpdate.setAddress(userManagement.getAddress());
@@ -49,13 +51,6 @@ public class UserManagementService {
             return false;
         }
 
-    }
-
-    public String encryptPassword(String password){
-        int strength = 31;
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(strength, new SecureRandom());
-        String encodedPassword = bCryptPasswordEncoder.encode(password);
-        return encodedPassword;
     }
 
     public UserManagement getOne(String username){
