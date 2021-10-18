@@ -1,29 +1,38 @@
 package com.example.demo.service;
 
-import org.apache.kafka.clients.ClientRequest;
-import org.apache.kafka.clients.ClientResponse;
-import org.omg.CORBA.PUBLIC_MEMBER;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
 import java.security.SecureRandom;
+import java.text.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 @Service
 public class HelperService {
-
-    int strength = 31;
-    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(strength, new SecureRandom());
 
     public String encryptPassword(String password){
         int strength = 31;
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(strength, new SecureRandom());
         String encodedPassword = bCryptPasswordEncoder.encode(password);
         return encodedPassword;
+    }
+
+    public Date getDateNow() throws ParseException {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
+        Date dateNow = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").parse(timeStamp);
+        return dateNow;
+    }
+
+    public String setThousandSeparator(BigDecimal value, char separator) {
+        DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+        DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
+
+        symbols.setGroupingSeparator(separator);
+        formatter.setDecimalFormatSymbols(symbols);
+
+        return formatter.format(value.longValue());
     }
 }
