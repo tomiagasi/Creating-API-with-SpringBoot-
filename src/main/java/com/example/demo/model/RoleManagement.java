@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "ROLE_MANAGEMENT")
 @EntityListeners(AuditingEntityListener.class)
-public class RoleManagement {
+public class RoleManagement extends Default {
 
     @Id
     @NotNull

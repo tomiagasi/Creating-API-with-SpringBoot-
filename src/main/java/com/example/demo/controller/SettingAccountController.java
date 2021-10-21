@@ -90,10 +90,8 @@ public class SettingAccountController {
                  */
                 Mail mail = new Mail();
                 mail.setMailFrom("no-reply@tomiagasi.com");
-                mail.setMailTo("tomiagasi@gmail.com");
+                mail.setMailTo(forgotPassword.getEmail());
                 mail.setMailSubject("Security Alert for "+forgotPassword.getEmail() );
-
-
                 mail.setMailContent(Constants.PROJECT_URI+"setting/account/update-forgot-password/"+returnSave.getReqId());
                 mailService.sendEmail(mail);
 
@@ -119,6 +117,7 @@ public class SettingAccountController {
             UserManagement userManagement = userManagementService.getOne(getOne.getUsername());
             requestForgotPasswordService.update(getOne.getReqId(), Constants.APPROVE);
             userManagement.setPassword(getOne.getPassword());
+            userManagement.setUpdatedDate(helperService.getDateNow());
             userManagementService.update(userManagement);
             errorCode.setCode(Constants.SUCCESS[0]);
             errorCode.setMessage(Constants.SUCCESS[1]);

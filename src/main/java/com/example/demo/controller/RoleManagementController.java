@@ -1,10 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.RoleManagement;
+import com.example.demo.service.HelperService;
 import com.example.demo.service.RoleManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,8 +17,12 @@ public class RoleManagementController {
     @Autowired
     private RoleManagementService roleManagementService;
 
+    @Autowired
+    private HelperService helperService;
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public RoleManagement save(@RequestBody RoleManagement roleManagement) {
+    public RoleManagement save(@RequestBody RoleManagement roleManagement) throws ParseException {
+        roleManagement.setCreatedDate(helperService.getDateNow());
         return roleManagementService.save(roleManagement);
     }
 

@@ -1,11 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.*;
+import com.example.demo.model.requestbody.Mail;
 import com.example.demo.model.requestbody.SigninRequest;
 import com.example.demo.model.responsebody.ErrorCode;
 import com.example.demo.model.responsebody.SignInResponse;
 import com.example.demo.security.jwt.JwtTokenUtil;
 import com.example.demo.security.jwt.JwtUserDetailsService;
+import com.example.demo.service.HelperService;
 import com.example.demo.service.KafkaProducerService;
 import com.example.demo.service.RoleManagementService;
 import com.example.demo.service.UserManagementService;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/user-management")
@@ -35,7 +38,8 @@ public class UserManagementController {
     @Autowired
     private JwtUserDetailsService jwtUserDetailsService;
 
-    private final Logger logger = LoggerFactory.getLogger(KafkaProducerService.class);
+    @Autowired
+    private HelperService helperService;
 
     private ErrorCode errorCode = new ErrorCode();
 
@@ -60,6 +64,8 @@ public class UserManagementController {
         }
 
         try{
+            userManagement.setCreatedDate(helperService.getDateNow());
+
             return ResponseEntity.ok(userManagementService.save(userManagement));
         }catch (Exception e){
             errorCode.setCode(Constants.METHOD_ERROR[0]);

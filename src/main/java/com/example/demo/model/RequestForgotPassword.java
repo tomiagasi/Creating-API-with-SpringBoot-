@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "REQUEST_FORGOT_PASSWORD")
 @EntityListeners(AuditingEntityListener.class)
-public class RequestForgotPassword {
+public class RequestForgotPassword extends Default {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")

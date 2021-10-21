@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "USER_MANAGEMENT")
 @EntityListeners(AuditingEntityListener.class)
-public class UserManagement {
+public class UserManagement extends Default{
 
     @Id
     @NotNull
@@ -43,4 +43,6 @@ public class UserManagement {
     @JsonIgnore
     @JoinColumn(name = "ROLEID", insertable = false, updatable = false)
     private RoleManagement roleManagement;
+
+
 }
