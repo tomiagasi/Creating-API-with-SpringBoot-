@@ -16,4 +16,8 @@ public class GenericService {
     public List<Map<String, Object>> findUsingJDBC(String query) {
         return jdbcTemplate.queryForList(query);
     }
+
+    public void deleteByJdbc(String query) {
+        jdbcTemplate.update(query);
+    }
 }
