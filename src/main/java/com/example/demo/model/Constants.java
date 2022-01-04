@@ -2,24 +2,22 @@ package com.example.demo.model;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import java.nio.file.Path;
+
 public class Constants {
 
     public static String PROJECT_URI = "http://localhost:8037/";
 
     public static final int MAX_REQUESTS_PER_SECOND = 10;
 
-    /*
-    Kafka config
-     */
+    /* Kafka config */
     public static final String topic = "testing-tomi";
     public static final String groupId = "testing";
     public static String KAFKA_SERVER;
     public static final int PARTITIONS = 2;
     public static final short REPLICATION = 2;
 
-    /*
-    ERROR CODE & MESSAGE
-     */
+    /* ERROR CODE & MESSAGE */
     public static final String[] SUCCESS = {"00", "Success"};
     public static final String[] USERNAME_EXIST = {"83", "Username already exist!"};
     public static final String[] ROLE_NOT_AVAILABLE = {"84", "Role not available!"};
@@ -30,17 +28,33 @@ public class Constants {
     public static final String[] EMAIL_EXIST = {"90", "Email already exist!"};
     public static final String[] INVALID_EMAIL = {"91", "Invalid Email!"};
     public static final String[] REQID_NOT_AVAILABLE = {"53", "Request ID not available!"};
+    public static final String[] QUERY_UNDEFINE = {"54", "Query Undefine"};
 
-    /*
-    MASTER_STATUS
-     */
+    /* MASTER_STATUS */
     public static final int APPROVE = 54;
     public static final int WAITING_APPROVAL = 63;
     public static final int REJECT = 67;
 
+    /* Path log application */
+    public static final String pathLogApplication = "C:\\Users\\lawencon.tomi\\Documents\\demo\\log\\";
+
+    /* File log application */
+    public static final String fileLogApplication = "demo-application";
+
+    /* Multipart Configuration */
+    public static Path UPLOAD_PATH;
+
+    /*Sql Injection*/
+    public static final String[] SQL_INJECTION = {"\\"};
+
     @Value("${spring.kafka.producer.bootstrap-servers}")
     public void setKafkaServer(String kafkaServer) {
         KAFKA_SERVER = kafkaServer;
+    }
+
+    @Value("${file.upload-dir}")
+    public static void setUploadPath(Path uploadPath) {
+        Constants.UPLOAD_PATH = uploadPath;
     }
 }
 

@@ -6,10 +6,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.naming.NamingException;
 
+@EnableScheduling
 @SpringBootApplication
 public class TestApplication {
 
@@ -26,8 +28,5 @@ public class TestApplication {
 	public DispatcherServlet dispatcherServlet() {
 		return new LoggableDispatcherServlet();
 	}
-
-
-
 
 }
