@@ -11,6 +11,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>test</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -33,10 +34,16 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web-services</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-classic</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -53,11 +60,6 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -124,11 +126,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-log4j2</artifactId>
-			<version>2.6.2</version>
-		</dependency>
 		<!-- asynchronous loggers -->
 		<dependency>
 			<groupId>com.lmax</groupId>
@@ -139,9 +136,31 @@
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-yaml</artifactId>
 		</dependency>
+		<dependency>
+			<groupId> com.fasterxml.jackson.core </groupId>
+			<artifactId> jackson-core </artifactId>
+			<version> 2.11.2 </version>
+		</dependency>
+		<dependency>
+			<groupId> com.fasterxml.jackson.core </groupId>
+			<artifactId> jackson-databind </artifactId>
+			<version> 2.11.2 </version>
+		</dependency>
+		<dependency>
+			<groupId> com.fasterxml.jackson.core </groupId>
+			<artifactId> jackson-annotations </artifactId>
+			<version> 2.11.2 </version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
+		<finalName>demo</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -153,6 +172,13 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<webXml>src\main\web-app\WEB-INF\jboss-web.xml</webXml>
 				</configuration>
 			</plugin>
 		</plugins>

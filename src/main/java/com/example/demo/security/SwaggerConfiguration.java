@@ -1,7 +1,10 @@
 package com.example.demo.security;
 
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.*;
@@ -13,7 +16,7 @@ import java.util.*;
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConfiguration {
+public class SwaggerConfiguration extends WebMvcConfigurationSupport {
 	private static final Set<String> DEFAULT_PRODUCES_CONSUMES = new HashSet<String>(Arrays.asList("application/json"));
 
 	Contact contact = new Contact(
@@ -50,5 +53,13 @@ public class SwaggerConfiguration {
 				.build()
 				// Setting globalOperationParameters ensures that authentication header is applied to all APIs
 				.globalOperationParameters(parameters);
+	}
+
+	@Override
+	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("swagger-ui.html")
+				.addResourceLocations("classpath:/META-INF/resources/");
+		registry.addResourceHandler("/webjars/**")
+				.addResourceLocations("classpath:/META-INF/resources/webjars/");
 	}
 }

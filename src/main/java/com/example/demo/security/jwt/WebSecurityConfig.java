@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 
 import java.util.Properties;
 
@@ -75,7 +76,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/swagger-resources/**",
                 "/swagger-ui.html",
                 "/v2/api-docs",
-                "/webjars/**", "/setting/account/update-forgot-password/**", "/setting/account/forgot-password/**").permitAll().
+                "/webjars/**", "/setting/account/update-forgot-password/**", "/setting/account/forgot-password/**", "/upload-file/**").permitAll().
                 // all other requests need to be authenticated
                         anyRequest().authenticated().and().
                 // make sure we use stateless session; session won't be used to
@@ -105,4 +106,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         mailSender.setJavaMailProperties(javaMailProperties);
         return mailSender;
     }
+
+
 }
